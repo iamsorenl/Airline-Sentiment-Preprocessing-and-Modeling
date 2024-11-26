@@ -1,0 +1,30 @@
+Comparison of Custom Tokenizer and NLTK Tokenizer:
+--------------------------------------------------
+
+Example 1:
+Original Text: @VirginAmerica What @dhepburn said.
+Custom Tokenizer Output: ['@VirginAmerica', 'What', '@dhepburn', 'said', '.']
+NLTK Tokenizer Output: ['@', 'VirginAmerica', 'What', '@', 'dhepburn', 'said', '.']
+
+Example 2:
+Original Text: @VirginAmerica plus you've added commercials to the experience... tacky.
+Custom Tokenizer Output: ['@VirginAmerica', 'plus', "you've", 'added', 'commercials', 'to', 'the', 'experience', '...', 'tacky', '.']
+NLTK Tokenizer Output: ['@', 'VirginAmerica', 'plus', 'you', "'ve", 'added', 'commercials', 'to', 'the', 'experience', '...', 'tacky', '.']
+
+Example 3:
+Original Text: @VirginAmerica I didn't today... Must mean I need to take another trip!
+Custom Tokenizer Output: ['@VirginAmerica', 'I', "didn't", 'today', '...', 'Must', 'mean', 'I', 'need', 'to', 'take', 'another', 'trip', '!']
+NLTK Tokenizer Output: ['@', 'VirginAmerica', 'I', 'did', "n't", 'today', '...', 'Must', 'mean', 'I', 'need', 'to', 'take', 'another', 'trip', '!']
+
+Example 4:
+Original Text: @VirginAmerica it's really aggressive to blast obnoxious "entertainment" in your guests' faces &amp; they have little recourse
+Custom Tokenizer Output: ['@VirginAmerica', "it's", 'really', 'aggressive', 'to', 'blast', 'obnoxious', 'entertainment', 'in', 'your', 'guests', 'faces', '&amp', ';', 'they', 'have', 'little', 'recourse']
+NLTK Tokenizer Output: ['@', 'VirginAmerica', 'it', "'s", 'really', 'aggressive', 'to', 'blast', 'obnoxious', '``', 'entertainment', "''", 'in', 'your', 'guests', "'", 'faces', '&', 'amp', ';', 'they', 'have', 'little', 'recourse']
+
+Example 5:
+Original Text: @VirginAmerica and it's a really big bad thing about it
+Custom Tokenizer Output: ['@VirginAmerica', 'and', "it's", 'a', 'really', 'big', 'bad', 'thing', 'about', 'it']
+NLTK Tokenizer Output: ['@', 'VirginAmerica', 'and', 'it', "'s", 'a', 'really', 'big', 'bad', 'thing', 'about', 'it']
+
+Analysis:
+The custom tokenizer differs from NLTK's tokenizer in several ways. The custom tokenizer explicitly handles mentions, hashtags, and emojis, whereas NLTK's tokenizer focuses on splitting text into words and punctuation. As a result, NLTK's tokenizer may split hashtags or miss emojis, which the custom tokenizer captures separately. These differences make the custom tokenizer better suited for social media text processing.
