@@ -35,7 +35,7 @@ def part_1_b(tweets_df):
     fig.legend(sentiments, loc='upper center', ncol=3, title="Sentiments", bbox_to_anchor=(0.5, 1.05), fontsize=5)
 
     # Save and show the plot
-    plt.savefig("Sentiment_Distribution_Grid_Fixed.png")
+    plt.savefig("Sentiment_Distribution_Grid.png")
     plt.show()
 
 def main():
