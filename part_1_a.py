@@ -2,11 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import math
 
-def part_1_a():
-    tweets = 'Tweets.csv'
-    relevant_columns = ['airline_sentiment', 'negativereason', 'airline', 'text']
-    tweets_df = pd.read_csv(tweets, usecols=relevant_columns)
-
+def part_1_a(tweets_df):
     for airline in tweets_df['airline'].unique():
         # Filter tweets for the current airline
         airline_data = tweets_df[tweets_df['airline'] == airline]
