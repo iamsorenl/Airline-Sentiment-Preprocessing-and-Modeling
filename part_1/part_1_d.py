@@ -1,5 +1,5 @@
 import nltk
-from part_1_c import custom_tokenizer
+from part_1.part_1_c import custom_tokenizer
 from nltk.tokenize import word_tokenize
 nltk.download('punkt')  # Ensure NLTK's tokenizer is available
 
