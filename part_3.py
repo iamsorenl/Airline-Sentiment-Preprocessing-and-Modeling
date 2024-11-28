@@ -32,8 +32,8 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
 
     # Perform 10-fold Cross-Validation
     cross_val_scores = cross_val_score(model, X_train_tfidf, y_train, cv=10, scoring='accuracy')
-    print("10-Fold Cross-Validation Scores:", cross_val_scores)
-    print("Mean Validation Accuracy: {:.4f}".format(cross_val_scores.mean()))
+    print("\n10-Fold Cross-Validation Scores:", cross_val_scores)
+    print("\nMean Validation Accuracy: {:.4f}".format(cross_val_scores.mean()))
 
     # Train and Evaluate on the Test Set
     model.fit(X_train_tfidf, y_train)
@@ -43,6 +43,7 @@ def train_and_evaluate_model(X_train, X_test, y_train, y_test):
     print("\nTest Set Accuracy: {:.4f}".format(accuracy_score(y_test, y_pred)))
     print("\nClassification Report:\n", classification_report(y_test, y_pred))
     print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
+    print("\n")
 
 def part_3(tweets_df):
     """
