@@ -1,40 +1,40 @@
 # Airline Sentiment Analysis and Preprocessing
 
-This project implements sentiment analysis on the Twitter US Airline Sentiment dataset. It includes data analysis, preprocessing, and machine learning model training for sentiment classification. The analysis leverages custom tokenization and cleaning pipelines, while the classification task is powered by a **Support Vector Machine (SVM)** using Scikit-learn. Additional analysis explores user behaviors and geographical insights.
+This project performs sentiment analysis on the Twitter US Airline Sentiment dataset, combining exploratory data analysis, custom preprocessing, and machine learning for sentiment classification. Leveraging custom tokenization and cleaning pipelines, the classification is powered by a **Support Vector Machine (SVM)** model. Additional analyses uncover insights into user behaviors and geographical trends.
 
 ---
 
 ## Table of Contents
 
-- [Project Overview](#project-overview)
+- [Overview](#overview)
 - [Requirements](#requirements)
 - [Installation](#installation)
-- [Dataset Structure](#dataset-structure)
+- [Dataset](#dataset)
 - [Usage](#usage)
-- [Pipeline Stages](#pipeline-stages)
+- [Pipeline Details](#pipeline-details)
   - [Data Analysis](#data-analysis)
   - [Data Cleaning](#data-cleaning)
   - [Model Training](#model-training)
-  - [Additional Analysis](#additional-analysis)
+  - [Additional Analyses](#additional-analyses)
 - [Evaluation](#evaluation)
 - [Limitations and Future Work](#limitations-and-future-work)
 
 ---
 
-## Project Overview
+## Overview
 
-The Twitter US Airline Sentiment dataset is a labeled collection of tweets expressing customer sentiments (positive, negative, neutral) about various airlines. This project focuses on:
+The Twitter US Airline Sentiment dataset contains labeled tweets expressing sentiments (positive, neutral, negative) about six airlines. This project emphasizes:
 
-- **Data Analysis**: Understanding trends in sentiment distribution, tweet length, and frequent sentiments.
-- **Preprocessing**: Cleaning and normalizing text data with custom pipelines.
-- **Model Training**: Using SVM to classify tweets based on sentiment, with a focus on ablation studies for preprocessing steps.
-- **Additional Analysis**: Exploring user behaviors, geographic insights, and top-words using TF-IDF.
+- **Data Analysis**: Examining sentiment trends, tweet lengths, and frequent sentiments.
+- **Preprocessing**: Cleaning and normalizing text using a custom pipeline.
+- **Model Training**: Classifying tweets with an SVM model while evaluating the impact of preprocessing.
+- **Additional Analyses**: Investigating user behaviors, geographic patterns, and top keywords.
 
 ---
 
 ## Requirements
 
-To set up the project, ensure you have the following dependencies:
+To run this project, the following dependencies are required:
 
 - Python >= 3.11
 - Pandas
@@ -43,9 +43,9 @@ To set up the project, ensure you have the following dependencies:
 - Matplotlib
 - Regex
 
-### Installing Dependencies
+### Installation of Dependencies
 
-You can install all necessary packages by running:
+Install the necessary packages via:
 
 ```bash
 pip install -r requirements.txt
@@ -55,16 +55,16 @@ pip install -r requirements.txt
 
 ## Installation
 
-### 1. Clone the Repository
+### Step 1: Clone the Repository
 
 ```bash
 git clone https://github.com/your-username/airline-sentiment-analysis.git
 cd airline-sentiment-analysis
 ```
 
-### 2. Create a Virtual Environment
+### Step 2: Set Up a Virtual Environment
 
-To avoid package conflicts, it is recommended to use a virtual environment:
+To avoid package conflicts, create a virtual environment:
 
 ```bash
 python3 -m venv venv
@@ -76,80 +76,72 @@ venv\Scripts\activate
 
 ---
 
-## Dataset Structure
+## Dataset
 
-Ensure the following files are present in the project directory:
+### File Structure
 
-- `Tweets.csv`: Twitter US Airline Sentiment dataset.
+Ensure the dataset file `Tweets.csv` is located in the project directory.
 
-### Example Data Format
+**Example Data Format:**
 
-| airline_sentiment | airline | text                                        | name     | tweet_location | airline_sentiment_confidence |
-| ----------------- | ------- | ------------------------------------------- | -------- | -------------- | ---------------------------- |
+| airline_sentiment | airline | text                                      | name     | tweet_location | airline_sentiment_confidence |
+| ----------------- | ------- | ----------------------------------------- | -------- | -------------- | ---------------------------- |
 | negative          | Delta   | "Flight delayed for 2 hours. Unacceptable." | john_doe | Philadelphia   | 0.98                         |
 
 ---
 
 ## Usage
 
-### Running the Analysis and Pipeline
+### Running the Complete Pipeline
 
-To execute the full pipeline, including data analysis, cleaning, model training, and additional analysis:
+To execute the full analysis, cleaning, model training, and additional tasks:
 
 ```bash
 python main.py
 ```
 
-This command will:
-
-1. Perform data analysis (tweet length distributions, sentiment distributions).
-2. Clean and preprocess the dataset.
-3. Train an SVM model for sentiment classification.
-4. Generate insights for user and geographic analysis.
-
 ---
 
-## Pipeline Stages
+## Pipeline Details
 
 ### Data Analysis
 
-1. Compute statistics for each airline, including:
+1. Compute key statistics for each airline:
    - Total tweets.
    - Most frequent sentiments and their counts.
-   - Length of shortest and longest tweets.
+   - Shortest and longest tweet lengths.
 2. Generate:
-   - Histogram for tweet lengths, binned in intervals of 5.
-   - Sentiment distribution grid plot for all airlines.
+   - Tweet length histograms (binned by 5 characters).
+   - Sentiment distribution grid for all airlines.
 
 ### Data Cleaning
 
-The cleaning pipeline includes:
+The preprocessing pipeline includes:
 
-- Removing mentions, currency symbols, URLs, emails, emojis, punctuation, and HTML characters.
-- Normalizing dates, times, and repeated characters.
-- Lemmatizing verbs.
-- Removing duplicate rows and empty tweets.
+- Removal: Mentions, URLs, emojis, HTML characters, punctuation, duplicate rows, and empty tweets.
+- Normalization: Dates, times, repeated characters, and text casing.
+- Lemmatization: Standardize verbs to their base forms.
 
 ### Model Training
 
-1. Encode tweets using TF-IDF.
-2. Train an **SVM classifier** with the following parameters:
-   - Penalty: L2
+1. Encode cleaned tweets using TF-IDF vectors.
+2. Train an SVM classifier with:
    - Loss: Hinge
+   - Penalty: L2
    - Learning Rate: 0.001
 3. Perform:
    - 10-fold cross-validation.
-   - Ablation study to evaluate the impact of preprocessing actions.
-4. Output:
-   - Classification accuracy, precision, recall, F1 scores.
+   - Ablation studies to assess preprocessing impacts.
+4. Outputs:
+   - Classification accuracy, precision, recall, and F1 scores.
    - Confusion matrix.
 
-### Additional Analysis
+### Additional Analyses
 
-1. Identify top-5 words for each user using TF-IDF, saved to `top_words_per_user.csv`.
-2. Determine the most active users for each airline and extract their tweets, locations, and sentiments.
-3. Analyze geographic data, identifying variations of "Philadelphia" in tweet locations.
-4. Create and save a subset of tweets with sentiment confidence > 0.6.
+1. Identify top-5 words for each user via TF-IDF, saved as `top_words_per_user.csv`.
+2. Determine the most active users for each airline and analyze their tweets and sentiment.
+3. Parse geographical data to identify tweets from variations of “Philadelphia.”
+4. Create a subset of tweets with confidence > 0.6, saved as `high_confidence_subset.csv`.
 
 ---
 
@@ -157,13 +149,13 @@ The cleaning pipeline includes:
 
 ### Metrics
 
-The model is evaluated using:
+Model performance is evaluated using:
 
-- **Classification Accuracy**
-- **Class-level Precision, Recall, F1 Score**
-- **Confusion Matrix**
+- Classification Accuracy
+- Precision, Recall, F1 Scores (class-level and overall)
+- Confusion Matrix
 
-### Example Results
+**Example Results:**
 
 | Metric               | Value  |
 | -------------------- | ------ |
@@ -178,15 +170,17 @@ The model is evaluated using:
 
 ### Current Limitations
 
-- **Dataset Imbalance**: The dataset has a high proportion of negative tweets, which skews classification performance.
-- **Neutral Sentiment Challenges**: Neutral tweets are harder to classify, given their overlap with positive and negative sentiments.
+- **Dataset Imbalance**: The prevalence of negative sentiments impacts classifier performance.
+- **Neutral Sentiment Challenges**: Neutral tweets are harder to classify due to overlaps with positive and negative sentiments.
 
 ### Future Work
 
-- **Advanced Models**: Incorporate Transformer-based models like BERT for improved performance.
-- **Automated Hyperparameter Tuning**: Implement grid or random search for parameter optimization.
-- **Dynamic Cleaning Pipelines**: Adjust cleaning actions based on tweet characteristics for better preprocessing.
+- **Advanced Models**: Experiment with Transformer-based models like BERT for enhanced accuracy.
+- **Hyperparameter Optimization**: Use grid or random search for better parameter tuning.
+- **Adaptive Cleaning Pipelines**: Tailor preprocessing steps to tweet characteristics for improved results.
 
 ---
 
-This project highlights the importance of preprocessing and modeling decisions in sentiment classification tasks.
+This project highlights the importance of preprocessing and analytical techniques in sentiment classification, emphasizing the balance between noise reduction and context preservation.
+
+---
