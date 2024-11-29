@@ -50,10 +50,22 @@ def part_3(tweets_df):
     Main function for Part 3.
     """
     # Clean the data
-    clean_data = part_2(tweets_df)
+    cleaned_df, cleaning_stats, cleaning_changes = part_2(tweets_df)
+
+    # Print stats
+    print("Cleaning Stats:")
+    for step, count in cleaning_stats.items():
+        print(f"{step}: {count} rows affected")
+
+    # Print examples of changes for each cleaning step
+    for step, examples in cleaning_changes.items():
+        print(f"\nChanges for {step}:")
+        for original, cleaned in examples[:5]:  # Show up to 5 examples per step
+            print(f"Original: {original}\nCleaned: {cleaned}")
+    print("\n")
 
     # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = split_data(clean_data)
+    X_train, X_test, y_train, y_test = split_data(cleaned_df)
 
     # Train and evaluate the model
     train_and_evaluate_model(X_train, X_test, y_train, y_test)
