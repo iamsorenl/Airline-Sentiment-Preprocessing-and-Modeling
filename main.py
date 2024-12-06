@@ -28,9 +28,9 @@ def main():
     ]   
     tweets_df = pd.read_csv(tweets, usecols=relevant_columns)
     part_1(tweets_df)
-    pt2 = part_2(tweets_df)
+    cleaned_df, _, _ = part_2(tweets_df)
     print("\n----------- Part 2 -----------\n")
-    print(pt2.head(10))
+    print(cleaned_df.head(10))
     print("\n----------- Part 3 -----------\n")
     part_3(tweets_df)
     # part 4 was the report
