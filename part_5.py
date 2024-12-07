@@ -25,7 +25,6 @@ def part_5(tweets_df):
     top_words_df.to_csv('top_words_per_user.csv')
     print("[INFO] Top 5 words for each user saved to 'top_words_per_user.csv'.\n")
 
-
     # Find the most active users for each airline
     if 'airline' not in tweets_df.columns:
         print("[ERROR] Dataset must include an 'airline' column for identifying active users.")
