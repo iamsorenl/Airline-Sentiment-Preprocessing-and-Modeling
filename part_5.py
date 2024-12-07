@@ -3,7 +3,7 @@ import pandas as pd
 import re
 
 def part_5(tweets_df):
-    # 1. Find number of unique users
+    # Find number of unique users
     if 'name' not in tweets_df.columns:
         print("[ERROR] Dataset must include a 'name' column for unique user identification.")
         return
@@ -26,7 +26,7 @@ def part_5(tweets_df):
     print("[INFO] Top 5 words for each user saved to 'top_words_per_user.csv'.\n")
 
 
-    # 2. Find the most active users for each airline
+    # Find the most active users for each airline
     if 'airline' not in tweets_df.columns:
         print("[ERROR] Dataset must include an 'airline' column for identifying active users.")
         return
@@ -42,7 +42,7 @@ def part_5(tweets_df):
     print("\n[INFO] Details of most active users:")
     print(active_user_details[['name', 'airline', 'text', 'tweet_location', 'airline_sentiment']])
 
-    # 3. Count and drop missing values in tweet_location and user_timezone
+    # Count and drop missing values in tweet_location and user_timezone
     missing_tweet_location = tweets_df['tweet_location'].isna().sum() if 'tweet_location' in tweets_df.columns else 0
     missing_user_timezone = tweets_df['user_timezone'].isna().sum() if 'user_timezone' in tweets_df.columns else 0
     print(f"[INFO] Missing values - tweet_location: {missing_tweet_location}, user_timezone: {missing_user_timezone}")
@@ -50,13 +50,13 @@ def part_5(tweets_df):
     tweets_df = tweets_df.dropna(subset=['tweet_location', 'user_timezone'], how='any').copy()
     print("[INFO] Rows with missing values in 'tweet_location' and 'user_timezone' dropped.")
 
-    # 4. Parse tweet_created field
+    # Parse tweet_created field
     if 'tweet_created' in tweets_df.columns:
         tweets_df.loc[:, 'tweet_created'] = pd.to_datetime(tweets_df['tweet_created'], errors='coerce').copy()
         print("[INFO] Parsed 'tweet_created' field into datetime format:")
         print(tweets_df['tweet_created'].head())
 
-    # 5. Find tweets from Philadelphia
+    # Find tweets from Philadelphia
     if 'tweet_location' in tweets_df.columns:
         philly_variations = tweets_df['tweet_location'].dropna().unique()
         philly_variations = [loc for loc in philly_variations if re.search(r'philadelphia', loc, re.IGNORECASE)]
@@ -64,7 +64,7 @@ def part_5(tweets_df):
         philly_tweets = tweets_df[tweets_df['tweet_location'].str.contains(r'philadelphia', na=False, case=False)]
         print(f"[INFO] Total tweets from Philadelphia: {len(philly_tweets)}")
 
-    # 6. Create subset with high sentiment confidence
+    # Create subset with high sentiment confidence
     if 'airline_sentiment_confidence' in tweets_df.columns:
         high_confidence_subset = tweets_df[tweets_df['airline_sentiment_confidence'] > 0.6].copy()
         high_confidence_subset.to_csv('high_confidence_subset.csv', index=False)
